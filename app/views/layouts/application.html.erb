@@ -14,6 +14,7 @@
       <img src="/gfx/logo.png"/>
       <span>Ribbit</span>
       <% if current_user %>
+          <%= link_to "Public Ribbits", ribbits_path %>
           <%= link_to "Logout", logout_path %>
         <% else %>
           <%= form_tag sessions_path do %>
