@@ -2,13 +2,37 @@
 <html>
 <head>
   <title>Ribbit</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <link rel="stylesheet/less" href="/style.less" />
+  <script src="/less.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <header>
+    <div class="wrapper">
+      <img src="/gfx/logo.png"/>
+      <span>Ribbit</span>
+    </div>
+  </header>
+  
+  <div id="content"> 
+    <div class="wrapper">
+      
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "flash #{name}" %>
+      <% end %>
+
+      <%= yield %>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrapper">
+      Ribbit - A Twitter Clone in Rails
+    </div>
+  </footer>
 
 </body>
 </html>
