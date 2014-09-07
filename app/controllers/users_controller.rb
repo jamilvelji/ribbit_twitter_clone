@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def new
     if current_user
       redirect_to activity_path
@@ -39,6 +40,22 @@ class UsersController < ApplicationController
       follower_id: current_user.id,
       followed_id: @user.id
     ).first_or_initialize if current_user
+  end
+
+  def edit
+    @user = User.find(params[:id])
+
+    redirect_to @user unless @user == current_user
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(user_params)
+      redirect_to @user, notice: "Profile updated!"
+    else
+      render "edit"
+    end
   end
 
   private
