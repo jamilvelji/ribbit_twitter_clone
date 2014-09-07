@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   resources :relationships
-
   resources :ribbits
-
   resources :sessions
   resources :users
+
+  get 'activity', to: 'users#activity', as: 'activity'
 
   get 'logout', to: 'sessions#destroy', as:'logout'
 

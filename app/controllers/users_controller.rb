@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
+    if current_user
+      redirect_to activity_path
+    else
+      @user = User.new
+    end
   end
 
   def create
@@ -18,6 +22,16 @@ class UsersController < ApplicationController
     @ribbit = Ribbit.new
   end
 
+  def activity
+    if current_user
+      @ribbit = Ribbit.new
+      buddies_ids = current_user.followeds.map(&:id).push(current_user.id)
+      @ribbits = Ribbit.where(user_id: buddies_ids)
+    else
+      redirect_to root_url
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     @ribbit = Ribbit.new
@@ -26,6 +40,7 @@ class UsersController < ApplicationController
       followed_id: @user.id
     ).first_or_initialize if current_user
   end
+
   private
 
   def user_params

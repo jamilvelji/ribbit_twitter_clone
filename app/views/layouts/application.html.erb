@@ -14,6 +14,7 @@
       <img src="/gfx/logo.png"/>
       <span>Ribbit</span>
       <% if current_user %>
+          <%= link_to "Activity Feed", activity_path %>
           <%= link_to "Discover", ribbits_path %>
           <%= link_to "Users", users_path %>
           <%= link_to "Me", user_path(current_user) %>
